@@ -58,6 +58,13 @@ Route::group (['prefix' => 'admin'], function () {
             ]);
         })->name('getSlug');
 
+        //category update
+        Route::get('/categories/edit/{idCategory}',[CategoryController::class,'edit'])->name('categories.edit');
+        Route::post('/categories/update/{idCategory}',[CategoryController::class,'update'])->name('categories.update');
+
+        //category delete
+        Route::get('/categories/delete/{idCategory}',[CategoryController::class,'destroy'])->name('categories.delete');
+
     });
     
 });

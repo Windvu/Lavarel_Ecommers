@@ -149,12 +149,6 @@
         <!-- /.container-fluid -->
     </section>
 
-    <!--The announce-->
-
-    
-
-
-    <!--./The announce-->
     
     <!-- Main content -->
     <section class="content">
