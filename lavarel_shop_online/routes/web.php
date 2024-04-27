@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminLoginController;
+use App\Http\Controllers\admin\BrandsController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\HomeController;
@@ -33,10 +34,11 @@ Route::group (['prefix' => 'admin'], function () {
 
     //if not login, you can't access dashboard
     Route::group(['middleware' => 'admin.auth'], function () {
+        //-----------------Home-----------------
         Route::get('/dashboard',[HomeController::class,'index'])->name('admin.dashboard');
         Route::get('/logout',[HomeController::class,'logout'])->name('admin.logout');
-        //-----------------category-----------------
 
+        //-----------------Category-----------------
         //category list
         Route::get('/categories/index',[CategoryController::class,'index'])->name('categories.index');
         //category image
@@ -63,13 +65,29 @@ Route::group (['prefix' => 'admin'], function () {
         Route::get('/categories/delete/{idCategory}',[CategoryController::class,'destroy'])->name('categories.delete');
 
 
-        //-----------------sub-category-----------------
+        //-----------------Sub-category-----------------
         //sub-category list
         Route::get('/subcategories/index',[SubCategoryController::class,'index'])->name('subcategories.index');
         //sub-category store
         Route::get('/subcategories/create',[SubCategoryController::class,'create'])->name('subcategories.create');
         Route::post('/subcategories/store',[SubCategoryController::class,'store'])->name('subcategories.store');
+        //sub-category update
+        Route::get('/subcategories/edit/{idSub}',[SubCategoryController::class,'edit'])->name('subcategories.edit');
+        Route::post('/subcategories/update/{idSub}',[SubCategoryController::class,'update'])->name('subcategories.update');
+        //sub-category delete
+        Route::get('/subcategories/delete/{idSub}',[SubCategoryController::class,'destroy'])->name('subcategories.delete');
 
+        //-----------------Brands-----------------
+        //brands list
+        Route::get('/brands/index',[BrandsController::class,'index'])->name('brands.index');
+        //brands store
+        Route::get('/brands/create',[BrandsController::class,'create'])->name('brands.create');
+        Route::post('/brands/store',[BrandsController::class,'store'])->name('brands.store');
+        //brands update
+        Route::get('/brands/edit/{idBrand}',[BrandsController::class,'edit'])->name('brands.edit');
+        Route::post('/brands/update/{idBrand}',[BrandsController::class,'update'])->name('brands.update');
+        //brands delete
+        Route::get('/brands/delete/{idBrand}',[BrandsController::class,'destroy'])->name('brands.delete');
 
 
     });

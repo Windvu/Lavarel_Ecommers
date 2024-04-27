@@ -11,7 +11,7 @@
         </ul>
         <div class="navbar-nav pl-2">
             <ol class="breadcrumb p-0 m-0 bg-white">
-                <li class="breadcrumb-item"><a href="../subcategories/index">Sub-Category</a></li>
+                <li class="breadcrumb-item"><a href="index">Brands</a></li>
                 <li class="breadcrumb-item active"><a href="">Create</a></li>
             </ol>
         </div>
@@ -140,10 +140,10 @@
         <div class="container-fluid my-2">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Create Sub Category</h1>
+                    <h1>Create Brands</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="{{route('subcategories.index')}}" class="btn btn-primary">Back</a>
+                    <a href="{{route('brands.index')}}" class="btn btn-primary">Back</a>
                 </div>
             </div>
         </div>
@@ -158,23 +158,11 @@
 
             <div id="alert-container"></div>
 
-            <form action="{{ route('subcategories.store') }}" method="POST" id="subCategoryForm" class="subCategoryForm">
+            <form action="{{route('brands.store')}}" method="POST" id="brandsForm" class="brandsForm">
                 
                 <div class="card">
                     <div class="card-body">								
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="name">Category</label>
-                                    <select name="id_category" id="id_category" class="form-control">
-                                        <option value="0">Select Category</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>                                                                                    
-                                        @endforeach                                       
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
+                        <div class="row">                                                 
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">Name</label>
@@ -188,8 +176,7 @@
                                     <input type="text" readonly name="slug" id="slug" class="form-control" placeholder="Slug">	
                                     <p></p>
                                 </div>
-                            </div>	
-                            
+                            </div>	                         
                             <div class="col-md-6">
                                 <div class="mb-3" >
                                     <label for="status">Status</label>
@@ -217,23 +204,21 @@
 
 @section('customJs')
 <script>
-    $('#subCategoryForm').submit(function(event){
+    $('#brandsForm').submit(function(event){
 
         event.preventDefault();// prevents the form from submitting traditionally.
         var element = $(this);//selects the form element.
         $.ajax({
-            url:'{{route("subcategories.store")}}',
+            url:'{{route("brands.store")}}',
             type:'POST',
             data:element.serializeArray(),// serializes the form data.
             dataType:'json',//jQuery automatically parse the response into a JavaScript object if the server returns JSON
             success:function(response){
-            var error = response['error'];
-            
+            var error = response['error'];          
             if(response['status']==true){
                 //window.location.href="{{route('categories.index')}}";
                 $('#name').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                 $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
-                $('#category').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                 // Create the success alert
                 var successAlert = `
                     <div class="alert alert-success alert-dismissible">
@@ -259,11 +244,7 @@
                     $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                 };
 
-                if(error['id_category']){
-                    $('#id_category').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html("Please select category");
-                }else{
-                    $('#id_category').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
-                }
+
             }                
           
             }, error:function(jqXHR, exception){//jqXHR is the object that represents the AJAX request. It provides information about the error, such as the status code and any error messages.
@@ -289,26 +270,6 @@
     });
 
 
-    // Dropzone.autoDiscover = false;
-    // const dropzone = $("#image").dropzone({
-    //     init: function(){
-    //         this.on('addedfile', function(file){
-    //             if(this.files.length >1){
-    //                 this.removeFile(this.file[0]);
-    //             }
-    //         });
-    //     },
-    //     url: "{{ route('temp-images.create') }}", // Route to handle file upload
-    //     maxFilesize: 2, // MB
-    //     paramName: "image", // The name that will be used to transfer the file
-    //     acceptedFiles: "image/jpeg,image/png,image/gif", // Allowed file types
-    //     addRemoveLinks: true,
-    //     headers:{
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')           
-    //     }, success: function(file, response){
-    //         $('#id_image').val(response.Id_image);
-    //     }
-    // });
 
 
 </script>

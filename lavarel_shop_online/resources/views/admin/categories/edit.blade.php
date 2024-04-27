@@ -10,9 +10,10 @@
             </li>					
         </ul>
         <div class="navbar-nav pl-2">
-            <!-- <ol class="breadcrumb p-0 m-0 bg-white">
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol> -->
+            <ol class="breadcrumb p-0 m-0 bg-white">
+                <li class="breadcrumb-item"><a href="../index">Category</a></li>
+                <li class="breadcrumb-item active"><a href="">Edit</a></li>
+            </ol>
         </div>
         
         <ul class="navbar-nav ml-auto">
@@ -79,7 +80,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="brands.html" class="nav-link">
+                        <a href="{{route('brands.index')}}" class="nav-link">
                             <svg class="h-6 nav-icon w-6 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
@@ -213,7 +214,7 @@
                 </div>
                 <div class="pb-5 pt-3">
                     <button class="btn btn-primary" type="submit">Update</button>
-                    <a href="{{route('categories.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
+                    <a href="{{route('categories.edit',$category->id)}}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>           
         </div>

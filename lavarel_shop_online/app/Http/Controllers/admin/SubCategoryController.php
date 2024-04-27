@@ -47,7 +47,7 @@ class SubCategoryController extends Controller
             $subCategory->save();
             return response()->json([
                 'status'=>true,
-                'message'=>'Sub Category created successfully'
+                'messege'=>'Sub Category created successfully'
             ]);
         }else{
             return response()->json([
@@ -57,16 +57,44 @@ class SubCategoryController extends Controller
         }
     }
 
-    public function edit($id){
-        
+    public function edit($idSub){
+        $subCategory=SubCategory::find($idSub);
+        $category=Category::orderBy('name','asc')->get();
+        $data['categories']=$category;
+        return view('admin.subCategories.edit',['subCategory'=>$subCategory],$data);
     }   
      
-    public function update(Request $request, $id){
-        
-    }   
+    public function update(Request $request, $idSub){
+        $validator=Validator::make($request->all(),[
+            'name'=>'required',
+            'slug'=>'required|unique:sub_categories,slug,'.$idSub.',id',
+            'status'=>'required|integer',
+            'id_category'=>'required|integer|min:1'
+        ]);
 
-    public function destroy($id){
-        
+        if($validator->passes()){
+            $subCategory=SubCategory::find($idSub);
+            $subCategory->name=$request->name;
+            $subCategory->slug=$request->slug;
+            $subCategory->status=$request->status;
+            $subCategory->category_id=$request->id_category;
+            $subCategory->save();
+            return response()->json([
+                'status'=>true,
+                'message'=>'Sub Category updated successfully'
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'error' => $validator->errors()
+            ]);
+        } 
+    }  
+
+    public function destroy($idSub){
+        $subCategory=SubCategory::find($idSub);
+        $subCategory->delete();
+        return redirect()->route('subcategories.index') ;
     }   
 
 }
