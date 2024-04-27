@@ -3,7 +3,6 @@
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\BrandsController;
 use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\TempImagesController;
 use Illuminate\Support\Facades\Route;
@@ -41,11 +40,14 @@ Route::group (['prefix' => 'admin'], function () {
         //-----------------Category-----------------
         //category list
         Route::get('/categories/index',[CategoryController::class,'index'])->name('categories.index');
+
         //category image
         Route::post('/upload-temp-image',[TempImagesController::class,'create'])->name('temp-images.create');
+
         //category store
         Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
         Route::post('/categories/store',[CategoryController::class,'store'])->name('categories.store');
+
         Route::get('/getSlug', function (Request $request){
             $slug='';
             if(!empty($request->title)){
@@ -58,12 +60,15 @@ Route::group (['prefix' => 'admin'], function () {
                 'slug' => $slug
             ]);
         })->name('getSlug');
+
         //category update
         Route::get('/categories/edit/{idCategory}',[CategoryController::class,'edit'])->name('categories.edit');
         Route::post('/categories/update/{idCategory}',[CategoryController::class,'update'])->name('categories.update');
+
         //category delete
         Route::get('/categories/delete/{idCategory}',[CategoryController::class,'destroy'])->name('categories.delete');
 
+<<<<<<< HEAD
 
         //-----------------Sub-category-----------------
         //sub-category list
@@ -90,6 +95,8 @@ Route::group (['prefix' => 'admin'], function () {
         Route::get('/brands/delete/{idBrand}',[BrandsController::class,'destroy'])->name('brands.delete');
 
 
+=======
+>>>>>>> parent of 5efb344 (Subcategory: Create and List)
     });
     
 });
