@@ -88,7 +88,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="products.html" class="nav-link">
+                        <a href="{{route('products.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-tag"></i>
                             <p>Products</p>
                         </a>
@@ -167,7 +167,7 @@
                                 <div class="mb-3">
                                     <label for="name">Category</label>
                                     <select name="id_category" id="id_category" class="form-control">
-                                        <option value="0">Select Category</option>
+                                        <option value="">Select Category</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>                                                                                    
                                         @endforeach                                       
@@ -233,7 +233,7 @@
                 //window.location.href="{{route('categories.index')}}";
                 $('#name').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                 $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
-                $('#category').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
+                $('#id_category').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                 // Create the success alert
                 var successAlert = `
                     <div class="alert alert-success alert-dismissible">

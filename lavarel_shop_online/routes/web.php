@@ -5,6 +5,8 @@ use App\Http\Controllers\admin\BrandsController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ProductSubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -41,10 +43,8 @@ Route::group (['prefix' => 'admin'], function () {
         //-----------------Category-----------------
         //category list
         Route::get('/categories/index',[CategoryController::class,'index'])->name('categories.index');
-
         //category image
         Route::post('/upload-temp-image',[TempImagesController::class,'create'])->name('temp-images.create');
-
         //category store
         Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
         Route::post('/categories/store',[CategoryController::class,'store'])->name('categories.store');
@@ -95,7 +95,16 @@ Route::group (['prefix' => 'admin'], function () {
         //brands delete
         Route::get('/brands/delete/{idBrand}',[BrandsController::class,'destroy'])->name('brands.delete');
 
-        
+        //-----------------Products-----------------
+        //products store
+        Route::get('/products/create',[ProductController::class,'create'])->name('products.create');
+        Route::get('/products/sub_category',[ProductSubCategoryController::class,'index'])->name('productSubCategory.index');
+        Route::post('/products/store',[ProductController::class,'store'])->name('products.store');
+        //products list
+        Route::get('/products/index',[ProductController::class,'index'])->name('products.index');
+        //products update
+        Route::get('/products/edit/{idProduct}',[ProductController::class,'edit'])->name('products.edit');
+        Route::post('/products/update/{idProduct}',[BrandsController::class,'update'])->name('products.update');
 
     });
     

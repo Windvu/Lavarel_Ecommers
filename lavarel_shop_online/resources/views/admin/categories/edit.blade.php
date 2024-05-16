@@ -74,7 +74,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="subcategory.html" class="nav-link">
+                        <a href="{{route('subcategories.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-file-alt"></i>
                             <p>Sub Category</p>
                         </a>
@@ -88,7 +88,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="products.html" class="nav-link">
+                        <a href="{{route('products.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-tag"></i>
                             <p>Products</p>
                         </a>
@@ -190,7 +190,7 @@
                                 <div class="mb-3">
                                     @if(($category->image)!=null)
                                         <td>
-                                            <img src="{{asset('/temp/'.$category->image)}}" width="50%" alt="{{$category -> name}}" title="{{$category -> name}}" onclick="showImageFullScreen(this.src)">
+                                            <img src="{{asset('/temp/categories/'.$category->image)}}" width="50%" alt="{{$category -> name}}" title="{{$category -> name}}" onclick="showImageFullScreen(this.src)">
                                         </td>
                                     @else
                                         <td>

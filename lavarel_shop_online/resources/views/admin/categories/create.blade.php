@@ -11,7 +11,7 @@
         </ul>
         <div class="navbar-nav pl-2">
             <ol class="breadcrumb p-0 m-0 bg-white">
-                <li class="breadcrumb-item"><a href="../subcategories/index">Category</a></li>
+                <li class="breadcrumb-item"><a href="../categories/index">Category</a></li>
                 <li class="breadcrumb-item active"><a href="">Create</a></li>
             </ol>
         </div>
@@ -74,7 +74,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="subcategory.html" class="nav-link">
+                        <a href="{{route('subcategories.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-file-alt"></i>
                             <p>Sub Category</p>
                         </a>
@@ -88,7 +88,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="products.html" class="nav-link">
+                        <a href="{{route('products.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-tag"></i>
                             <p>Products</p>
                         </a>
@@ -291,7 +291,7 @@
             });
         },
         url: "{{ route('temp-images.create') }}", // Route to handle file upload
-        maxFilesize: 2, // MB
+        maxFilesize: 4, // MB
         paramName: "image", // The name that will be used to transfer the file
         acceptedFiles: "image/jpeg,image/png,image/gif", // Allowed file types
         addRemoveLinks: true,

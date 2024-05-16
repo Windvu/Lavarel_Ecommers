@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class SubCategoryController extends Controller
 {
     public function index(Request $request){
-        $subCategories = DB::table('sub_categories as sub')
+        $subCategories = DB::table('sub_category as sub')
             ->join('categories as cate', 'cate.id', '=', 'sub.category_id')
             ->select('sub.id', 'sub.name', 'sub.slug', 'cate.name as category_name', 'sub.status')
             ->orderBy('sub.id', 'asc');
@@ -33,9 +33,9 @@ class SubCategoryController extends Controller
     public function store(Request $request){
         $validator=Validator::make($request->all(),[
             'name'=>'required',
-            'slug'=>'required|unique:sub_categories',
+            'slug'=>'required|unique:sub_category',
             'status'=>'required|integer',
-            'id_category'=>'required|integer|min:1'
+            'id_category'=>'required|integer'
         ]);
 
         if($validator->passes()){
@@ -67,7 +67,7 @@ class SubCategoryController extends Controller
     public function update(Request $request, $idSub){
         $validator=Validator::make($request->all(),[
             'name'=>'required',
-            'slug'=>'required|unique:sub_categories,slug,'.$idSub.',id',
+            'slug'=>'required|unique:sub_category,slug,'.$idSub.',id',
             'status'=>'required|integer',
             'id_category'=>'required|integer|min:1'
         ]);

@@ -74,7 +74,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="subcategory.html" class="nav-link">
+                        <a href="{{route('subcategories.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-file-alt"></i>
                             <p>Sub Category</p>
                         </a>
@@ -88,7 +88,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="products.html" class="nav-link">
+                        <a href="{{route('products.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-tag"></i>
                             <p>Products</p>
                         </a>
@@ -200,13 +200,13 @@
                                 
                                 @if(($category->image)!=null)
                                     <td>
-                                        <img src="{{asset('/temp/'.$category->image)}}" width="150" height="80" alt="{{$category -> name}}" title="{{$category -> name}}" onclick="showImageFullScreen(this.src)">
+                                        <img src="{{asset('/temp/categories/'.$category->image)}}" width="150" height="80" alt="{{$category -> name}}" title="{{$category -> name}}" onclick="showImageFullScreen(this.src)">
                                     </td>
                                 @else
                                     <td>
                                         <img src="{{asset('/temp/no-image-icon-6.png')}}" width="150" height="80" alt="No image" title="No image" onclick="showImageFullScreen(this.src)">
                                     </td>
-                            @endif                                   
+                                @endif                                   
 
                                 @if ($category -> status == true)
                                     <td>
@@ -242,15 +242,7 @@
         </div>
         
         <div class="card-footer clearfix">
-            {{$categories->links('pagination::bootstrap-5')}}
-
-            {{-- <ul class="pagination pagination m-0 float-right">
-              <li class="page-item"><a class="page-link" href="#">«</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul> --}}
+            {{$categories->links('pagination::bootstrap-5')}}            
         </div>
         <!-- /.card -->
     </section>
