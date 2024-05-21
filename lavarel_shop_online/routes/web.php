@@ -104,7 +104,9 @@ Route::group (['prefix' => 'admin'], function () {
         Route::get('/products/index',[ProductController::class,'index'])->name('products.index');
         //products update
         Route::get('/products/edit/{idProduct}',[ProductController::class,'edit'])->name('products.edit');
-        Route::post('/products/update/{idProduct}',[BrandsController::class,'update'])->name('products.update');
+        Route::post('/products/update/{idProduct}',[ProductController::class,'update'])->name('products.update');
+        //product delete
+        Route::get('/products/delete/{idProduct}',[ProductController::class,'destroy'])->name('products.delete');
 
     });
     

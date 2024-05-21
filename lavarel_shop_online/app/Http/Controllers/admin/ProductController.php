@@ -10,6 +10,9 @@ use App\Models\SubCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Exists;
 
 class ProductController extends Controller
 {
@@ -154,7 +157,7 @@ class ProductController extends Controller
             $product->save();
 
             //Update product images
-            $productImages[] = ProductImage:: where('product_id',$idProduct)->get();
+            $productImages = ProductImage:: where('product_id',$idProduct)->get();
             foreach($productImages as $productImage){
                 $productImage->delete();
             }
@@ -162,9 +165,11 @@ class ProductController extends Controller
             if(!empty($request->image_array)){
                 foreach($request->image_array as $temp_image_id){
                     $tempImage = Images::find($temp_image_id);
+                    
                     $productImage = new ProductImage();
                     $productImage->product_id = $product->id;
                     $productImage->image = $tempImage->name;
+                   
                     $productImage->save();
                 }
             }
@@ -180,5 +185,37 @@ class ProductController extends Controller
             ]);
         }
 
+    }
+
+    //Delete product
+    public function destroy($idProduct){
+        $product = Products::find($idProduct);
+
+    if (!$product) {
+        return redirect()->route('products.index')->with('error', 'Product not found');
+    }
+
+    // Delete associated images from the database
+    $productImages = ProductImage::where('product_id', $idProduct)->get();
+    foreach ($productImages as $productImage) {
+        // Construct the full path to the image
+        $filePathProduct = public_path('temp/products/' . $productImage->image);
+        $filePathCategory=public_path('temp/categories/'.$productImage->image);
+        // Check if the file exists and delete it
+        if (File::exists($filePathProduct)) {
+            File::delete($filePathProduct);
+        }
+        if(File::exists($filePathCategory)){
+            File::delete($filePathCategory);
+        }
+
+        // Delete the image record from the database
+        $productImage->delete();
+    }
+
+    // Delete the product from the database
+    $product->delete();
+
+    return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
 }

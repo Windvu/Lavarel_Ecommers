@@ -94,7 +94,7 @@ class SubCategoryController extends Controller
     public function destroy($idSub){
         $subCategory=SubCategory::find($idSub);
         $subCategory->delete();
-        return redirect()->route('subcategories.index') ;
+        return redirect()->route('subcategories.index')->with('success', 'Sub-category deleted successfully') ;
     }   
 
 }
